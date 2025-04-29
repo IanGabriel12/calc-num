@@ -7,26 +7,30 @@ def f(x):
 def der_f(x):
     return 2*x + 1
 
-def mtd_newton(x_0):
-    e = 10**(-8)
-    boolean = False
-    i = 1
+def proxima_aproximacao(f, der_f, xk):
+    return xk - f(xk)/der_f(xk)
+
+raiz = 2
+
+def mtd_newton(f, der_f, a, b):
+    e = 10**-8
+    xk = (a + b) / 2  # Chute inicial: ponto médio do intervalo
+    num_iter = 0
     start_time = time.time()
 
-    while boolean == False:
-        x_1 = x_0 - f(x_0)/der_f(x_0)
+    while abs(f(xk)) > e:
+        num_iter += 1
+        xk = proxima_aproximacao(f, der_f, xk)
 
-        if abs(x_1 - x_0) < e:
-            end_time = time.time()  
-            elapsed_time = end_time - start_time  
-            print("A raiz aproximada foi, ", x_1, " depois de ", i, " iterações")
-            print("Erro absoluto: ", abs(2 - x_1))
-            print("Erro relativo: ", abs(2 - x_1)/x_1)
-            print(elapsed_time)
-            return x_1
-        
-        x_0 = x_1
-        i+=1
+    end_time = time.time()
+    seconds = end_time - start_time
 
-mtd_newton(1.8)
+    print(f"Raiz encontrada: {xk:.9f}")
+    print(f"Número de iterações: {num_iter}")
+    print(f"Tempo gasto (s): {seconds:.9f}")
+    print(f"Erro relativo: {(raiz - xk)/raiz:.9f}")
+    print(f"Erro absoluto: {(raiz - xk):.9f}")
+
+# Chamando o método
+mtd_newton(f, der_f, 1.8, 2.2)
 
