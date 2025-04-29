@@ -32,37 +32,24 @@ def fixed_point(a, b):
     return x
 
 def main():
-    a = 1.0
-    b = 3.0
-    h = 0.4
+    a = 1.8
+    b = 2.2
     exact_root = 2.0
 
-    for start in frange(a, b, h):
-        end = start + h
-        if end > b:
-            end = b
+    start_time = time.perf_counter()
 
-        print(f"\nIntervalo [{start}, {end}]")
+    root = fixed_point(a, b)
 
-        start_time = time.perf_counter()
+    end_time = time.perf_counter()
 
-        root = fixed_point(start, end)
+    abs_error = abs(root - exact_root)
+    rel_error = abs_error / abs(exact_root)
 
-        end_time = time.perf_counter()
-
-        abs_error = abs(root - exact_root)
-        rel_error = abs_error / abs(exact_root)
-
-        print(f"Raiz aproximada: {root:.9f}")
-        print(f"f(raiz) = {f(root):.9f}")
-        print(f"Erro absoluto: {abs_error:.9f}")
-        print(f"Erro relativo: {rel_error:.9f}")
-        print(f"Tempo de execução: {end_time - start_time:.9f} segundos")
-
-def frange(start, stop, step):
-    while start < stop:
-        yield start
-        start += step
+    print(f"Raiz aproximada: {root:.9f}")
+    print(f"f(raiz) = {f(root):.9f}")
+    print(f"Erro absoluto: {abs_error:.9f}")
+    print(f"Erro relativo: {rel_error:.9f}")
+    print(f"Tempo de execução: {end_time - start_time:.9f} segundos")
 
 if __name__ == "__main__":
     main()
