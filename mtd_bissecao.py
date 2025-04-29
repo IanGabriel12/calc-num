@@ -8,7 +8,7 @@ def relative_error(absolute_error_value, real_x):
 def f3(x):
   return x**2 + x -6
 
-def bissecao_method(a, b, epsilon):
+def bissecao_method(a, b, epsilon, f3):
   start_time = time.time()
 
   x = (a+b)/2
@@ -41,7 +41,7 @@ def bissecao_method(a, b, epsilon):
 
 # Executando o método
 real_x = 2
-aproximate_x = bissecao_method(1.8, 2.2, epsilon)
+aproximate_x = bissecao_method(1.8, 2.2, epsilon, f3)
 
 print("A raiz encontrada pelo método da bisseção é: {}".format(aproximate_x))
 
