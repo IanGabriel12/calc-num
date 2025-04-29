@@ -8,7 +8,8 @@ def relative_error(absolute_error_value, real_x):
   return (absolute_error_value/(abs(real_x)))
 
 f2 = lambda x: x**5 - 2 * x**4 - 9 * x**3 + 22 * x**2 + 4 * x - 24
-f3 = lambda x: 2 * x**4 + 4 * x**3 + 3 * x**2 - 10 * x - 15
+f1 = lambda x: 2 * x**4 + 4 * x**3 + 3 * x**2 - 10 * x - 15
+f3 = lambda x: x**2 + x - 6
 
   
 def falsa_posicao_method(a, b, epsilon, f3):
@@ -46,10 +47,10 @@ def falsa_posicao_method(a, b, epsilon, f3):
 
   return x
 
-epsilon = 10**(-10)
+epsilon = 10**(-8)
 # Executando o método
-real_x = 1.5
-aproximate_x = falsa_posicao_method(0, 3, epsilon, f3)
+real_x = 2
+aproximate_x = falsa_posicao_method(1.8, 2.2, epsilon, f3)
 
 print("A raiz encontrada pelo método da falsa posição é: {}".format(aproximate_x))
 

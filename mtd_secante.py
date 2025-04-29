@@ -4,7 +4,7 @@ def proxima_raiz(f, xk, xkmenos1):
 
 raiz_vdd = 2
 def mtd_secante(f, a, b):
-    e = 10**(-10)
+    e = 10**(-8)
     xkmenos1 = a
     xk = b
     cnt_iteracoes = 1
