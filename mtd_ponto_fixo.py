@@ -53,11 +53,11 @@ def main():
         abs_error = abs(root - exact_root)
         rel_error = abs_error / abs(exact_root)
 
-        print(f"Raiz aproximada: {root:.15f}")
-        print(f"f(raiz) = {f(root):.15f}")
-        print(f"Erro absoluto: {abs_error:.15f}")
-        print(f"Erro relativo: {rel_error:.15f}")
-        print(f"Tempo de execução: {end_time - start_time:.15f} segundos")
+        print(f"Raiz aproximada: {root:.9f}")
+        print(f"f(raiz) = {f(root):.9f}")
+        print(f"Erro absoluto: {abs_error:.9f}")
+        print(f"Erro relativo: {rel_error:.9f}")
+        print(f"Tempo de execução: {end_time - start_time:.9f} segundos")
 
 def frange(start, stop, step):
     while start < stop:
