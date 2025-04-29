@@ -8,7 +8,7 @@ def relative_error(absolute_error_value, real_x):
 def f3(x):
   return x**2 + x -6
   
-def falsa_posicao_method(a, b, epsilon):
+def falsa_posicao_method(a, b, epsilon, f3):
   start_time = time.time()
 
   fa = f3(a)
@@ -45,7 +45,7 @@ def falsa_posicao_method(a, b, epsilon):
 
 # Executando o método
 real_x = 2
-aproximate_x = falsa_posicao_method(1.8, 2.2, epsilon)
+aproximate_x = falsa_posicao_method(1.8, 2.2, epsilon, f3)
 
 print("A raiz encontrada pelo método da falsa posição é: {}".format(aproximate_x))
 
