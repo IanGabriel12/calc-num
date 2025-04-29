@@ -1,3 +1,5 @@
+import time
+
 def absolute_error(aprox_x, real_x):
   return abs(aprox_x - real_x)
 
@@ -39,6 +41,7 @@ def bissecao_method(a, b, epsilon, f3):
 
   return x
 
+epsilon = 10**(-8)
 # Executando o método
 real_x = 2
 aproximate_x = bissecao_method(1.8, 2.2, epsilon, f3)
@@ -48,5 +51,5 @@ print("A raiz encontrada pelo método da bisseção é: {}".format(aproximate_x)
 absolute_error_value = absolute_error(aproximate_x, real_x)
 relative_error_value = relative_error(absolute_error_value, real_x)
 
-print(f"O erro absoluto da falsa posição é: {Decimal(absolute_error_value):.10f}")
-print(f"O erro relativo da falsa posição é: {Decimal(relative_error_value):.10f}")
+print(f"O erro absoluto da falsa posição é: {absolute_error_value:.10f}")
+print(f"O erro relativo da falsa posição é: {relative_error_value:.10f}")
