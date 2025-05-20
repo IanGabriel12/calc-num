@@ -1,10 +1,4 @@
-import time
-import cmath  
-
-def f(x):
-    return x**2 + x - 6
-
-raiz = 2
+import cmath
 
 def proxima_aproximacao_muller(f, x0, x1, x2):
     f0, f1, f2 = f(x0), f(x1), f(x2)
@@ -25,10 +19,8 @@ def proxima_aproximacao_muller(f, x0, x1, x2):
     x3 = x2 + (-2 * c) / denominator
     return x3
 
-def mtd_muller(f, a, b):
-    e = 1e-8
+def mtd_muller(f, a, b, eps):
     num_iter = 0
-    start_time = time.time()
 
     x0 = a
     x1 = (a + b) / 2
@@ -36,18 +28,9 @@ def mtd_muller(f, a, b):
 
     x3 = proxima_aproximacao_muller(f, x0, x1, x2)
 
-    while abs(f(x3)) > e and num_iter < 100:
+    while abs(f(x3)) > eps and num_iter < 100:
         num_iter += 1
         x0, x1, x2 = x1, x2, x3
         x3 = proxima_aproximacao_muller(f, x0, x1, x2)
 
-    end_time = time.time()
-    seconds = end_time - start_time
-
-    print(f"Raiz encontrada: {x3.real:.9f}")  # Considera parte real
-    print(f"Número de iterações: {num_iter}")
-    print(f"Tempo gasto (s): {seconds:.9f}")
-    print(f"Erro relativo: {abs(raiz - x3.real)/raiz:.9f}")
-    print(f"Erro absoluto: {abs(raiz - x3.real):.9f}")
-
-mtd_muller(f, 0, 3)
+    return(x3.real, num_iter)
