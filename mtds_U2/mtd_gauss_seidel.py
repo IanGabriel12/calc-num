@@ -59,7 +59,7 @@ def metodo_gauss_seidel(A, B, eps=1e-6):
 
     # Verifica o critério de convergência (pelo menos um critério deve ser satisfeito)
     if not (criterio_lc(A)):
-         return "O método pode não convergir."
+        print("Aviso: O método não garante a convergencia para esta matriz")
 
     X = np.zeros(n)
     for i in range(n):

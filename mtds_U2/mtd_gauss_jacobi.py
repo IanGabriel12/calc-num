@@ -25,7 +25,7 @@ def metodo_gaussjacobi(A, X, B, eps):
     n = len(A)
     criterio = criterio_lc(A)
     if criterio == 0:
-        return "O método não converge"
+        print("Aviso: O método não garante a convergencia para esta matriz")
 
     v_aux = np.zeros(n)
     x = 0 # iterador
