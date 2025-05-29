@@ -1,0 +1,20 @@
+Entrada: A(NxN), b(Nx1)
+
+L = Matriz ID
+U = A
+
+Para cada k de 0 até N-1:
+    Se U[k][k] == 0
+        Seja i o índice linha com o maior elemento (em valor absoluto) na coluna k
+        Troque linha k com linha i em A
+        Troque linha k com linha i em b
+    
+    Para cada i de k+1 até N-1:
+        M_ik = U[i][k] / U[k][k]
+        L[i][k] = M_ik
+        U[i] = U[i] - M_ik * U[k]
+
+y = solucao_trivial(L, b)
+x = solucao_trivial(U, y)
+
+retorne x

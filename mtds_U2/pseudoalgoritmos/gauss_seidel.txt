@@ -1,0 +1,45 @@
+Entrada: A(NxN), b(Nx1)
+Constantes: MAX_ITERACOES, PRECISAO
+
+Se A não atende o critério de linhas e nem de colunas:
+    imprima "O método não garante a convergencia"
+
+iteracoes = 0
+x_anterior = vetor Nx1
+
+Para cada i de 0 até N-1:
+    Se A[i][i] == 0 então:
+        Seja k a linha com o maior elemento ( em valor absoluto ) na coluna i
+        Troque linha k com linha i na matriz A e no vetor b
+
+    x_anterior[i] = b[i] / A[i][i]
+
+Enquanto iteracoes < MAX_ITERACOES:
+    x_atual = x_anterior
+
+    Para cada i de 0 até N-1:
+        auxiliar = 0
+        Para cada j de 0 até N-1:
+            Se j != i então:
+                auxiliar += A[i][j] * x_atual[j]
+
+        x_atual[i] = (B[i] - auxiliar) / A[i][i]
+
+    
+    diferenca = abs(x_atual - x_anterior) # posicao [i] é abs(x_atual[i] - x_anterior[i])
+    distancia_absoluta = max(diferenca)
+    norma_x_atual = max(x_atual)
+
+    # Quando norma_x_atual == 0 use apenas o critério de distância absoluta
+    Se norma_x_atual == 0 e distancia_absoluta < PRECISAO:
+        retorne x_atual
+
+    distancia_relativa = distancia_absoluta / norma_x_atual
+
+    Se distancia_relativa < PRECISAO e distancia_absoluta < PRECISAO
+        retorne x_atual
+
+    iteracoes += 1
+
+# Não convergiu
+retorne x_atual
