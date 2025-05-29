@@ -61,12 +61,20 @@ def metodo_gauss_seidel(A, B, eps=1e-6):
     if not (criterio_lc(A)):
         print("Aviso: O método não garante a convergencia para esta matriz")
 
-    X = np.zeros(n)
+    # Corrige elementos nulos na diagonal
     for i in range(n):
-      if A[i][i] == 0:
-        return "Erro: Elemento da diagonal é zero."
-      X[i] = B[i] / A[i][i]
-
+        if A[i][i] == 0:
+            for k in range(i + 1, n):
+                if A[k][i] != 0:
+                    # Troca as linhas i e k em A e B
+                    A[[i, k]] = A[[k, i]]
+                    B[[i, k]] = B[[k, i]]
+                    print(f"Linhas {i} e {k} trocadas para evitar divisão por zero.") #trocar prints por um sistema de logs, melhor?
+                    break
+            if A[i][i] == 0:
+                return "Erro: Não foi possível evitar divisão por zero mesmo após troca de linhas."
+    
+    X = np.zeros(n)
     x = 0  # iterador
     while x < 10000:
         X_anterior = np.copy(X)
@@ -79,7 +87,7 @@ def metodo_gauss_seidel(A, B, eps=1e-6):
                     aux += A[i][j] * X[j]
 
             if A[i][i] == 0:
-                return "Erro: Elemento da diagonal é zero, divisão por zero!"
+                return "Erro: Elemento da diagonal é zero, divisão por zero!" # precisa msm?
 
             X[i] = (1 / A[i][i]) * (B[i] - aux) # calcula o 1/a_ii(b - ax_i ...)
 
