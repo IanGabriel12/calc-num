@@ -1,45 +1,39 @@
-Entrada: A(NxN), b(Nx1)
-Constantes: MAX_ITERACOES, PRECISAO
+Função GaussSeidel(A, B, eps):
+    n = número de linhas da matriz A
 
-Se A não atende o critério de linhas e nem de colunas:
-    imprima "O método não garante a convergencia"
+    Se critério de convergência (linha ou coluna) não for satisfeito:
+        imprimir que a convergência não é garantida
 
-iteracoes = 0
-x_anterior = vetor Nx1
+    Para i de 0 até n-1:
+        Se A[i][i] == 0:
+            Procurar uma linha k > i tal que A[k][i] ≠ 0
+            Se encontrada:
+                Trocar linha i com linha k em A e também em B
+                imprimir(mostrar) a troca
+            Se não encontrada:
+                Retornar "Erro: não foi possível evitar divisão por zero"
 
-Para cada i de 0 até N-1:
-    Se A[i][i] == 0 então:
-        Seja k a linha com o maior elemento ( em valor absoluto ) na coluna i
-        Troque linha k com linha i na matriz A e no vetor b
+    X = vetor de n números aleatórios entre 0 e 1(vetor inicial)
 
-    x_anterior[i] = b[i] / A[i][i]
+    Para x de 0 até 10000:
+        X_anterior = cópia de X
 
-Enquanto iteracoes < MAX_ITERACOES:
-    x_atual = x_anterior
+        Para i de 0 até n-1:
+            soma = 0
+            Para j de 0 até n-1:
+                Se j diferente de i:
+                    soma += A[i][j] * X[j]
 
-    Para cada i de 0 até N-1:
-        auxiliar = 0
-        Para cada j de 0 até N-1:
-            Se j != i então:
-                auxiliar += A[i][j] * x_atual[j]
+            X[i] = (1 / A[i][i]) * (B[i] - soma)
 
-        x_atual[i] = (B[i] - auxiliar) / A[i][i]
+        dist_abs = máximo dos valores absolutos de (X - X_anterior)
+        dist_rel = dist_abs / máximo dos valores absolutos de X (se for diferente de 0)
 
-    
-    diferenca = abs(x_atual - x_anterior) # posicao [i] é abs(x_atual[i] - x_anterior[i])
-    distancia_absoluta = max(diferenca)
-    norma_x_atual = max(x_atual)
+        Se dist_abs < eps E dist_rel < eps:
+            imprimir "Convergência atingida em x+1 iterações"
+            residuo = B - A * X
+            imprimir vetor residuo
+            Retornar X
 
-    # Quando norma_x_atual == 0 use apenas o critério de distância absoluta
-    Se norma_x_atual == 0 e distancia_absoluta < PRECISAO:
-        retorne x_atual
-
-    distancia_relativa = distancia_absoluta / norma_x_atual
-
-    Se distancia_relativa < PRECISAO e distancia_absoluta < PRECISAO
-        retorne x_atual
-
-    iteracoes += 1
-
-# Não convergiu
-retorne x_atual
+    imprimir "Número máximo de iterações atingido"
+    Retornar None
