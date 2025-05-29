@@ -2,17 +2,17 @@ Entrada: A(NxN), b(Nx1)
 
 aumentada = A | b
 
-Para cada k de 0 até N-1:
+Para cada k de N-1 até 0:
     Se aumentada[k][k] == 0
         Seja i o índice linha com o maior elemento (em valor absoluto) na coluna k
         Troque linha k com linha i em aumentada
     
-    Para cada i de k+1 até N-1:
+    Para cada i de k-1 até 0:
         M_ik = aumentada[i][k] / aumentada[k][k]
         aumentada[i] = aumentada[i] - M_ik * aumentada[k]
 
 U = matriz aumentada da coluna 0 até N-2
 y = matriz aumentada coluna N-1
 
-x = solucao_trivial(U, y)
+x = solucao_trivial_superior(U, y)
 retorne x

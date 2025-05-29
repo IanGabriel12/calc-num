@@ -14,7 +14,7 @@ Para cada k de 0 até N-1:
         L[i][k] = M_ik
         U[i] = U[i] - M_ik * U[k]
 
-y = solucao_trivial(L, b)
-x = solucao_trivial(U, y)
+y = solucao_trivial_inferior(L, b)
+x = solucao_trivial_superior(U, y)
 
 retorne x

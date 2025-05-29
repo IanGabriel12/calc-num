@@ -1,0 +1,14 @@
+Entrada: Matriz A(NxN)
+Saída: Se a matriz satizfaz o critério das linhas
+
+Para cada i de 0 até N-1:
+    pivo = A[i][i]
+    soma = 0
+    Para cada j de 0 até N-1:
+        Se j != i então
+            soma += A[i][j]
+    
+    Se pivo <= soma:
+        retorne falso
+
+retorne verdadeiro

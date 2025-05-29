@@ -1,0 +1,14 @@
+Entrada: A(NxN), b(Nx1)
+Saída: Solução do sistema
+OBS: A é uma matriz diagonal inferior
+
+X = vetor Nx1
+
+Para cada i de 0 até N-1:
+    soma = 0
+    Para cada j de 0 até i-1:
+        soma += A[i][j]*X[j]
+    
+    X[i] = (b[i] - soma) / A[i][i]
+
+retorne X
