@@ -1,17 +1,5 @@
-from mtds_U2.fatoracao_lu import fatoracao_lu
+from mtds_U2.interpolacao.mtd_sistema_linear import mtd_sistema_linear_fatoracao_lu
 
-A = [
-    [0, 1, 7],
-    [1, 3, 2],
-    [2, 5, 3]
-]
-
-b = [
-    1, 
-    2, 
-    3
-]
-
-x = fatoracao_lu(A, b)
+x = mtd_sistema_linear_fatoracao_lu([(-1, 4), (0, 1), (2, -1)])
 
 print(x)
