@@ -28,7 +28,7 @@ Enquanto iteracoes < MAX_ITERACOES:
     
     diferenca = abs(x_atual - x_anterior) # posicao [i] é abs(x_atual[i] - x_anterior[i])
     distancia_absoluta = max(diferenca)
-    norma_x_atual = max(x_atual)
+    norma_x_atual = max(abs(x_atual))
 
     # Quando norma_x_atual == 0 use apenas o critério de distância absoluta
     Se norma_x_atual == 0 e distancia_absoluta < PRECISAO:
