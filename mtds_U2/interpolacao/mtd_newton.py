@@ -1,3 +1,4 @@
+import numpy as np
 def interpolacao_newton_completa(T, x_interpolar):
   """
   Calcula as diferenças divididas e realiza a interpolação

@@ -40,6 +40,7 @@ def criterio_lc(A):
         return False
 
 
+MAX_ITERACOES = 10000
 """
 Implementa o método de Gauss-Seidel para resolver sistemas lineares.
 
@@ -76,7 +77,7 @@ def metodo_gauss_seidel(A, B, eps=1e-6):
     
     X = np.zeros(n)
     x = 0  # iterador
-    while x < 10000:
+    while x < MAX_ITERACOES:
         X_anterior = np.copy(X)
 
         for i in range(n):

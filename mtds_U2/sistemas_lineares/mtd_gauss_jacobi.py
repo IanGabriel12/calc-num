@@ -1,5 +1,6 @@
 import numpy as np
 
+MAX_ITERACOES = 10000
 def criterio_lc(A):
     n = len(A)
 
@@ -29,7 +30,7 @@ def metodo_gaussjacobi(A, X, B, eps):
 
     v_aux = np.zeros(n)
     x = 0 # iterador
-    while(x < 10000): # número limite de iterações
+    while(x < MAX_ITERACOES): # número limite de iterações
         val_max = 0 # valor máximo da diferença x(k) - x(k-1)
         val_max_X = 0 # valor máximo do vetor X 
         for i in range(0, n):
