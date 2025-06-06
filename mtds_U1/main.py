@@ -1,4 +1,4 @@
-import funcoes
+import mtds_U1.funcoes as funcoes
 import time
 from mtd_bissecao import bissecao_method
 from mtd_muller import mtd_muller
