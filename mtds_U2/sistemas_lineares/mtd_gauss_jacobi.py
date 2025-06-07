@@ -1,6 +1,5 @@
 import numpy as np
 
-MAX_ITERACOES = 10000
 def criterio_lc(A):
     n = len(A)
 
@@ -22,12 +21,24 @@ def criterio_lc(A):
     else:
         return 1
 
-def metodo_gaussjacobi(A, X, B, eps=1e-6):
+def metodo_gaussjacobi(A, B, eps=1e-6, MAX_ITERACOES=10000):
     n = len(A)
     criterio = criterio_lc(A)
     if criterio == 0:
         print("Aviso: O método não garante a convergencia para esta matriz")
 
+    for i in range(n):
+        if A[i][i] == 0:
+            for k in range(i + 1, n):
+                if A[k][i] != 0:
+                    # Troca as linhas i e k em A e B
+                    A[[i, k]] = A[[k, i]]
+                    B[[i, k]] = B[[k, i]]
+                    break
+            if A[i][i] == 0:
+                raise "Erro: Não foi possível evitar divisão por zero mesmo após troca de linhas."
+    
+    X = np.array([B[i] / A[i][i] for i in range(n)])
     v_aux = np.zeros(n)
     x = 0 # iterador
     while(x < MAX_ITERACOES): # número limite de iterações
@@ -46,7 +57,9 @@ def metodo_gaussjacobi(A, X, B, eps=1e-6):
             if abs(X[i]) > val_max_X:
                 val_max_X = abs(X[i])
 
-        if val_max < eps and val_max/val_max_X < eps:
+        dist_relativo = val_max/val_max_X if val_max_X != 0 else val_max
+
+        if val_max < eps and dist_relativo < eps:
             residuo = B - np.dot(A, X)
             return X, residuo, x
         

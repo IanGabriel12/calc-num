@@ -24,6 +24,9 @@ def elim_gauss(A, b):
 
         pivo = aumentada[i,i]
 
+        if pivo == 0.0:
+            raise ValueError("Erro: Pivô é 0 mesmo após pivotiamento")
+
 
         for j in range(i+1, n):
             fator = aumentada[j, i] / pivo

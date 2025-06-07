@@ -39,8 +39,6 @@ def criterio_lc(A):
     else:
         return False
 
-
-MAX_ITERACOES = 10000
 """
 Implementa o método de Gauss-Seidel para resolver sistemas lineares.
 
@@ -55,7 +53,7 @@ Returns:
     str: Mensagem indicando que o método não converge.
     None: Se o número máximo de iterações for atingido.
 """
-def metodo_gauss_seidel(A, B, eps=1e-6):
+def metodo_gauss_seidel(A, B, eps=1e-6, MAX_ITERACOES=10000):
     n = len(A)
 
     # Verifica o critério de convergência (pelo menos um critério deve ser satisfeito)
@@ -74,7 +72,7 @@ def metodo_gauss_seidel(A, B, eps=1e-6):
             if A[i][i] == 0:
                 raise "Erro: Não foi possível evitar divisão por zero mesmo após troca de linhas."
     
-    X = np.zeros(n)
+    X = np.array([B[i] / A[i][i] for i in range(n)])
     x = 0  # iterador
     while x < MAX_ITERACOES:
         X_anterior = np.copy(X)
@@ -87,7 +85,7 @@ def metodo_gauss_seidel(A, B, eps=1e-6):
                     aux += A[i][j] * X[j]
 
             if A[i][i] == 0:
-                raise "Erro: Elemento da diagonal é zero, divisão por zero!" # precisa msm?
+                raise ValueError("Erro: Elemento da diagonal é zero, divisão por zero!") # precisa msm?
 
             X[i] = (1 / A[i][i]) * (B[i] - aux) # calcula o 1/a_ii(b - ax_i ...)
 

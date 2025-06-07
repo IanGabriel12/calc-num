@@ -1,5 +1,5 @@
 from .utils import resolve_inferior, resolve_superior
-
+import numpy as np
 def fatoracao_lu(A, b):
     '''
     Resolve um sistema de equações lineares Ax = b pelo método da FATORAÇÃO LU.
@@ -10,21 +10,24 @@ def fatoracao_lu(A, b):
     '''
 
     N = len(A)
-    L = [[0 for _ in range(N)] for _ in range(N)]
+    L = np.zeros((N, N));
     U = A.copy()
     bb = b.copy()
     
     for i in range(0, N):
-        if U[i][i] == 0:
-            melhor_linha = i+1
-            maior_valor = U[i+1][i]
-            for j in range(i+2, N):
+        if U[i][i] == 0.0:
+            melhor_linha = i
+            maior_valor = U[i][i]
+            for j in range(i+1, N):
                 if maior_valor < U[j][i]:
                     melhor_linha = j
                     maior_valor = U[j][i]
             bb[i], bb[melhor_linha] = bb[melhor_linha], bb[i]
             U[i], U[melhor_linha] = U[melhor_linha], U[i]
             L[i], L[melhor_linha] = L[melhor_linha], L[i]
+        
+        if U[i][i] == 0.0:
+            raise ValueError("Erro: Pivô é 0 mesmo após pivotiamento")
         
         L[i][i] = 1
 
