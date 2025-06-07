@@ -70,10 +70,9 @@ def metodo_gauss_seidel(A, B, eps=1e-6):
                     # Troca as linhas i e k em A e B
                     A[[i, k]] = A[[k, i]]
                     B[[i, k]] = B[[k, i]]
-                    print(f"Linhas {i} e {k} trocadas para evitar divisão por zero.") #trocar prints por um sistema de logs, melhor?
                     break
             if A[i][i] == 0:
-                return "Erro: Não foi possível evitar divisão por zero mesmo após troca de linhas."
+                raise "Erro: Não foi possível evitar divisão por zero mesmo após troca de linhas."
     
     X = np.zeros(n)
     x = 0  # iterador
@@ -88,7 +87,7 @@ def metodo_gauss_seidel(A, B, eps=1e-6):
                     aux += A[i][j] * X[j]
 
             if A[i][i] == 0:
-                return "Erro: Elemento da diagonal é zero, divisão por zero!" # precisa msm?
+                raise "Erro: Elemento da diagonal é zero, divisão por zero!" # precisa msm?
 
             X[i] = (1 / A[i][i]) * (B[i] - aux) # calcula o 1/a_ii(b - ax_i ...)
 
@@ -101,13 +100,11 @@ def metodo_gauss_seidel(A, B, eps=1e-6):
 
         # Critério de parada: distância absoluta E distância relativa devem ser menores que eps
         if dist_absoluto < eps and dist_relativo < eps:
-            print(f"Convergência atingida após {x+1} iterações.")
             # Calcula o vetor resíduo
             residuo = B - np.dot(A, X)
-            print("Vetor Resíduo:", residuo)
-            return X
+            return X, residuo, x
 
         x += 1
 
-    print("Número máximo de iterações atingido.")
-    return None  
+    residuo = B - np.dot(A, X)
+    return X, residuo, x  

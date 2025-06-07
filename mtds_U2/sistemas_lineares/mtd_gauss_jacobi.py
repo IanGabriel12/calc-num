@@ -22,7 +22,7 @@ def criterio_lc(A):
     else:
         return 1
 
-def metodo_gaussjacobi(A, X, B, eps):
+def metodo_gaussjacobi(A, X, B, eps=1e-6):
     n = len(A)
     criterio = criterio_lc(A)
     if criterio == 0:
@@ -47,10 +47,12 @@ def metodo_gaussjacobi(A, X, B, eps):
                 val_max_X = abs(X[i])
 
         if val_max < eps and val_max/val_max_X < eps:
-            return X 
+            residuo = B - np.dot(A, X)
+            return X, residuo, x
         
         x+=1
 
-    print("Número máximo de iterações")
+    residuo = B - np.dot(A, X);
+    return X, residuo, x
 
         

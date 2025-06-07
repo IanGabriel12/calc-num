@@ -23,7 +23,7 @@ def mtd_sistema_linear(P, mtd_resolucao_sistema):
         for j in range(0, sz):
             A[i][j] = x_i ** j
 
-    return mtd_resolucao_sistema(A, b)
+    return mtd_resolucao_sistema(A, b)[0]
 
 
 def mtd_sistema_linear_fatoracao_lu(P):

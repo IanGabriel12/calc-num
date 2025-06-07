@@ -33,7 +33,8 @@ def elim_gauss(A, b):
     U = aumentada[:, 0:n]
     y = aumentada[:, n:]
     x = resolve_superior(U, y)
-    return x
+    residuo = b - (A @ x)
+    return x, residuo, 0
 
 
 if __name__ == '__main__':
