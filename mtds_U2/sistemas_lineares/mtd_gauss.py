@@ -30,7 +30,7 @@ def elim_gauss(A, b):
 
         for j in range(i+1, n):
             fator = aumentada[j, i] / pivo
-            aumentada[j, i:] = aumentada[j, i:] - fator*aumentada[i, i:]
+            aumentada[j, :] = aumentada[j, :] - fator*aumentada[i, :]
 
         
     U = aumentada[:, 0:n]
