@@ -1,4 +1,5 @@
 import numpy as np
+import time
 
 def resolve_superior(A, b):
     n, _ = np.shape(A)
@@ -8,6 +9,7 @@ def resolve_superior(A, b):
     return x
 
 def elim_gauss(A, b):
+    inicio = time.perf_counter()
     n, _ = np.shape(A)
     aumentada = np.concatenate((A, b), axis=1)
 
@@ -37,7 +39,9 @@ def elim_gauss(A, b):
     y = aumentada[:, n:]
     x = resolve_superior(U, y)
     residuo = b - (A @ x)
-    return x, residuo, 0
+    fim = time.perf_counter()
+    tempo = fim - inicio
+    return x, residuo, 0, tempo
 
 
 if __name__ == '__main__':

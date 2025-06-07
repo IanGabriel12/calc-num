@@ -1,5 +1,6 @@
 from utils import resolve_inferior, resolve_superior
 import numpy as np
+import time
 def fatoracao_lu(A, b):
     '''
     Resolve um sistema de equações lineares Ax = b pelo método da FATORAÇÃO LU.
@@ -9,6 +10,7 @@ def fatoracao_lu(A, b):
     Retorno: Um vetor de tamanho N x 1. A solução do sistema
     '''
 
+    inicio = time.perf_counter()
     N = len(A)
     L = np.zeros((N, N), dtype=float);
     U = np.copy(A)
@@ -44,4 +46,6 @@ def fatoracao_lu(A, b):
     y = resolve_inferior(L, bb)
     x = resolve_superior(U, y)
     residuo = b - (A @ x)
-    return x, residuo, 0
+    fim = time.perf_counter()
+    tempo = fim - inicio
+    return x, residuo, 0, tempo

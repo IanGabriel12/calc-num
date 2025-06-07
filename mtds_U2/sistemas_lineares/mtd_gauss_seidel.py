@@ -1,4 +1,5 @@
 import numpy as np
+import time
 
 """
 Verifica o critério das linhas e colunas para convergência.
@@ -54,6 +55,7 @@ Returns:
     None: Se o número máximo de iterações for atingido.
 """
 def metodo_gauss_seidel(A, B, eps=1e-6, MAX_ITERACOES=10000):
+    inicio = time.perf_counter()
     n = len(A)
 
     # Verifica o critério de convergência (pelo menos um critério deve ser satisfeito)
@@ -100,9 +102,13 @@ def metodo_gauss_seidel(A, B, eps=1e-6, MAX_ITERACOES=10000):
         if dist_absoluto < eps and dist_relativo < eps:
             # Calcula o vetor resíduo
             residuo = B - np.dot(A, X)
-            return X, residuo, x
+            fim = time.perf_counter()
+            tempo = fim - inicio
+            return X, residuo, x, tempo
 
         x += 1
 
     residuo = B - np.dot(A, X)
-    return X, residuo, x  
+    fim = time.perf_counter()
+    tempo = fim - inicio
+    return X, residuo, x, tempo  

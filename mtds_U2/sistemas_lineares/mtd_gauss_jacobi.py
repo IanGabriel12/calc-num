@@ -1,4 +1,5 @@
 import numpy as np
+import time
 
 def criterio_lc(A):
     n = len(A)
@@ -22,6 +23,7 @@ def criterio_lc(A):
         return 1
 
 def metodo_gaussjacobi(A, B, eps=1e-6, MAX_ITERACOES=10000):
+    inicio = time.perf_counter()
     n = len(A)
     criterio = criterio_lc(A)
     if criterio == 0:
@@ -61,11 +63,15 @@ def metodo_gaussjacobi(A, B, eps=1e-6, MAX_ITERACOES=10000):
 
         if val_max < eps and dist_relativo < eps:
             residuo = B - np.dot(A, X)
-            return X, residuo, x
+            fim = time.perf_counter()
+            tempo = fim - inicio
+            return X, residuo, x, tempo
         
         x+=1
 
     residuo = B - np.dot(A, X);
-    return X, residuo, x
+    fim = time.perf_counter()
+    tempo = fim - inicio
+    return X, residuo, x, tempo
 
         
