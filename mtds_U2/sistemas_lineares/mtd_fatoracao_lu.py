@@ -28,7 +28,7 @@ def fatoracao_lu(A, b):
             U[i, :]= U[linha_pivo_atual, :]
             U[linha_pivo_atual, :] = temp1
 
-            temp2 = np.copy(b[i, :])
+            temp2 = np.copy(bb[i, :])
             bb[i, :]= bb[linha_pivo_atual, :]
             bb[linha_pivo_atual, :] = temp2
 
