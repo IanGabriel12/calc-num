@@ -31,3 +31,21 @@ def resolve_superior(A, b):
         x[i][0] = (b[i][0] - acc)/A[i][i]
     
     return x
+
+def salvar_solucao(caminho_arquivo, solucao, residuo, iteracoes, tempo):
+    with open(caminho_arquivo, 'w') as arquivo:
+        for x in solucao:
+            arquivo.write(f"{x:.4f} ")
+        arquivo.write("\n")
+
+        for x in residuo:
+            arquivo.write(f"{x:.4f} ")
+        arquivo.write("\n")
+
+        arquivo.write(f"{iteracoes}")
+        arquivo.write(f"\n{tempo:.4f} s")
+
+
+def salvar_solucao_sistema_linear(nome_metodo, numero_solucao, solucao, residuo, iteracoes, tempo):
+    caminho_arquivo = f"mtds_U2/sistemas_lineares/solucoes/{nome_metodo}_solucao_{numero_solucao}.txt"
+    salvar_solucao(caminho_arquivo, solucao, residuo, iteracoes, tempo)

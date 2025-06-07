@@ -1,5 +1,6 @@
 from scipy.io import mmread 
 import numpy as np
+import utils
 from mtd_fatoracao_lu import fatoracao_lu
 from mtd_gauss import elim_gauss
 from mtd_gauss_jacobi import metodo_gaussjacobi
@@ -13,22 +14,23 @@ B1 = np.random.randint(1, 51, size=(138, 1))
 B2 = np.random.randint(1, 51, size=(3134, 1))
 B3 = np.random.randint(1, 51, size=(3562, 1))
 
-# resolução com fatoração lu
-print(fatoracao_lu(matriz_um, B1))
-print(fatoracao_lu(matriz_dois, B2))
-print(fatoracao_lu(matriz_tres, B3))
+testes = [(matriz_um, B1), (matriz_dois, B2), (matriz_tres, B3)]
+
+def executar_metodo(metodo_func, nome_metodo, lista_testes):
+    for (i, teste) in enumerate(lista_testes):
+        A, B = teste
+        solucao, residuo, iteracoes, tempo = metodo_func(A, B)
+        utils.salvar_solucao_sistema_linear(nome_metodo, i, solucao.flatten(), residuo.flatten(), iteracoes, tempo)
+
 
 # resolução com gauss jacobi
-print(metodo_gaussjacobi(matriz_um, B1, eps=10e-6, MAX_ITERACOES=10000))
-print(metodo_gaussjacobi(matriz_dois, B2, eps=10e-6, MAX_ITERACOES=10000))
-print(metodo_gaussjacobi(matriz_tres, B3, eps=10e-6, MAX_ITERACOES=10000))
+executar_metodo(metodo_gaussjacobi, "gauss_jacobi", testes)
 
 # resolução com gauss seidel
-print(metodo_gauss_seidel(matriz_um, B1, eps=10e-6, MAX_ITERACOES=10000))
-print(metodo_gauss_seidel(matriz_dois, B2, eps=10e-6, MAX_ITERACOES=10000))
-print(metodo_gauss_seidel(matriz_tres, B3, eps=10e-6, MAX_ITERACOES=10000))
+executar_metodo(metodo_gauss_seidel, "gauss_seidel", testes)
 
 # resolução com gauss
-print(elim_gauss(matriz_um, B1))
-print(elim_gauss(matriz_dois, B2))
-print(elim_gauss(matriz_tres, B3))
+executar_metodo(elim_gauss, "elim_gauss", testes)
+
+# resolução com fatoração lu
+executar_metodo(fatoracao_lu, "fatoracao_lu", testes)
