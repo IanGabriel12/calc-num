@@ -58,7 +58,6 @@ def print_questao_21(P, x):
     print(f"f({x}) = {resposta}")
 
 
-
 def print_questao_22(P, x):
     _diferencas, resposta = interpolacao_newton_completa(P, x)
     print(f"f({x}) = {resposta}")
@@ -70,7 +69,7 @@ def print_questao_23(P, x):
 
 
 def print_questao_24(P, x, observado):
-    _diferencas, resposta = interpolacao_newton_completa(P, x)
+    resposta = mtd_interp_lagrange(P, x)
     print(f"f({x}) = {resposta}")
     print(f"Diferença entre o valor observado e o estipulado: |{resposta}-{observado}| = {abs(resposta-observado)}")
 
