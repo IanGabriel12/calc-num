@@ -38,7 +38,7 @@ def metodo_gaussjacobi(A, B, eps=1e-6, MAX_ITERACOES=10000):
             if A[i][i] == 0:
                 raise "Erro: Não foi possível evitar divisão por zero mesmo após troca de linhas."
     
-    X = np.array([B[i] / A[i][i] for i in range(n)])
+    X = np.ones((n, 1))
     v_aux = np.zeros(n)
     x = 0 # iterador
     while(x < MAX_ITERACOES): # número limite de iterações
@@ -49,7 +49,7 @@ def metodo_gaussjacobi(A, B, eps=1e-6, MAX_ITERACOES=10000):
             val_aux = 0 # variável auxiliar com um valor para determinar o valor atual da diferença x(k) - x(k-1)
             for j in range(0, n):
                 if i != j: aux += A[i][j]*X[j] 
-            X[i] = (1/A[i][i])*(B[i] - aux)
+            X[i] = (1/A[i][i])*(B[i][0] - aux)
             val_aux = abs(X[i] - v_aux[i])
             v_aux[i] = X[i]
             if val_aux > val_max:
@@ -65,6 +65,7 @@ def metodo_gaussjacobi(A, B, eps=1e-6, MAX_ITERACOES=10000):
         
         x+=1
 
+    print("Fim das 10000 iterações")
     residuo = B - np.dot(A, X);
     return X, residuo, x
 
