@@ -4,6 +4,9 @@ from mtds_U2.sistemas_lineares.mtd_gauss import elim_gauss
 from mtds_U2.sistemas_lineares.mtd_gauss_jacobi import metodo_gaussjacobi
 from mtds_U2.sistemas_lineares.mtd_gauss_seidel import metodo_gauss_seidel
 
+from mtds_U2.interpolacao.mtd_lagrange import mtd_interp_lagrange
+from mtds_U2.interpolacao.mtd_newton import interpolacao_newton_completa
+
 
 print("Sistemas Lineares")
 print("Questões da lista: ")
@@ -49,6 +52,29 @@ def print_questao_19(A, b):
         print(resposta.flatten(), residuo.flatten(), iteracoes)
     except:
         print("Sistema não tem solução única")
+
+def print_questao_21(P, x):
+    resposta = mtd_interp_lagrange(P, x)
+    print(f"f({x}) = {resposta}")
+
+
+
+def print_questao_22(P, x):
+    _diferencas, resposta = interpolacao_newton_completa(P, x)
+    print(f"f({x}) = {resposta}")
+
+
+def print_questao_23(P, x):
+    resposta = mtd_interp_lagrange(P, x)
+    print(f"f({x}) = {resposta}")
+
+
+def print_questao_24(P, x, observado):
+    _diferencas, resposta = interpolacao_newton_completa(P, x)
+    print(f"f({x}) = {resposta}")
+    print(f"Diferença entre o valor observado e o estipulado: |{resposta}-{observado}| = {abs(resposta-observado)}")
+
+
 
 # Questão 15 a)
 A = np.array(
@@ -161,5 +187,35 @@ A = np.array(
 b = np.array([[-3], [4], [7], [5]], dtype=float)
 
 print_questao_19(A, b)
+
+# Questão 21 (Lagrange)
+print("Questão 21")
+x = 0.75
+P = np.array([[0.0, 1.0], [0.2, 1.2408], [0.4, 1.5735], [0.6, 2.0333], [0.8, 2.6965], [1.0, 3.7183]])
+print_questao_21(P, x)
+
+# Questao 22 (Newton)
+
+print("Questão 22")
+x = 15.6
+P = np.array([[0.0, 10.0], [10.0, 20.56], [20.0, 30.67], [30.0, 67.78]])
+print_questao_22(P, x)
+
+
+# Questao 23
+print("Questao 23")
+x = 7
+P = np.array([[0., 6.67], [6., 17.33], [10., 42.67], [13., 37.33], [17., 30.1]])
+print_questao_23(P, x)
+
+# Questao 24
+print("Questão 24")
+P = np.array([[1970.0, 327.0], [1980.0, 337.0], [1990.0, 335.0], [2000.0, 370.0], [2010.0, 388.0]])
+x = 2008.
+observado = 381.
+print_questao_24(P, x, observado)
+
+
+
 
 
