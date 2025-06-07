@@ -44,7 +44,4 @@ def fatoracao_lu(A, b):
     y = resolve_inferior(L, bb)
     x = resolve_superior(U, y)
     residuo = b - (A @ x)
-    print(b)
-    print(A)
-    print(x)
     return x, residuo, 0
