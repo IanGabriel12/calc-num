@@ -9,14 +9,13 @@ matriz_um = mmread('mtds_U2/matrizes/bcsstk22.mtx').toarray()
 matriz_dois = mmread('mtds_U2/matrizes/bcsstk23.mtx').toarray()
 matriz_tres = mmread('mtds_U2/matrizes/bcsstk24.mtx').toarray()
 
-B1 = np.zeros((138, 1))
-B2 = np.zeros((3134, 1))
-B3 = np.zeros((3562, 1))
+B1 = np.random.randint(1, 51, size=(138, 1))
+B2 = np.random.randint(1, 51, size=(3134, 1))
+B3 = np.random.randint(1, 51, size=(3562, 1))
 
 # resolução com fatoração lu
 print(fatoracao_lu(matriz_um, B1))
 print(fatoracao_lu(matriz_dois, B2))
-print("3iteração")
 print(fatoracao_lu(matriz_tres, B3))
 
 # resolução com gauss jacobi
