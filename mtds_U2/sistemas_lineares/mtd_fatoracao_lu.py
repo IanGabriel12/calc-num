@@ -40,8 +40,7 @@ def fatoracao_lu(A, b):
         for j in range(i+1, N):
             mult = U[j, i] / U[i, i]
             L[j, i] = mult
-            for k in range(0, N):
-                U[j, k] -= U[i, k] * mult
+            U[j, :] = U[j, :] - mult*U[i, :]
 
     y = resolve_inferior(L, bb)
     x = resolve_superior(U, y)
