@@ -79,37 +79,41 @@ def metodo_gaussjacobi(A, B, eps=1e-6, MAX_ITERACOES=1000):
 def metodo_gaussjacobi2(A, b, eps=1e-6, MAX_ITERACOES=1000):
     inicio = time.perf_counter()
     n, _ = np.shape(A)
-
-    D = np.diag(np.diag(A))
-    if np.any(np.diag(D) == 0):
-        raise Exception("Erro: Diagonal com valor 0")
-
-    D_inv = np.linalg.inv(D)
-
-    T = np.eye(n) - D_inv @ A
-    C = D_inv @ b
-    X0 = np.zeros((n,1))
-    X = np.copy(X0)
+    inv = np.linalg.inv(A * np.eye(n))
+    B = np.eye(n) - inv@A
+    d = inv @ b
+    X_prev = np.zeros(n)
+    X = np.zeros(n)
     i = 0
-    erro = 1
-    while i <= MAX_ITERACOES:
-        X = T @ X0 + C
-        if np.max(np.abs(X)) == 0:
-             erro = np.max(np.abs(X - X0))
-        else:
-             erro = np.max(np.abs(X - X0)) / np.max(np.abs(X))
+    err = 1
 
-        if erro < eps:
-            fim = time.perf_counter()
-            tempo = fim - inicio
-            residuo = b - np.dot(A, X)
-            return X, residuo, i + 1, tempo
-        
-        X0 = np.copy(X)
+    diag = np.diag(np.abs(A))
+    resto_linhas = np.sum(np.abs(A), axis=1) - diag
+    if np.any(diag <= resto_linhas):
+        print("Nao converge: há diagonais nao dominantes")
+
+
+    while i <= MAX_ITERACOES and err > eps:
+        X = B @ X_prev + d
+        err = np.max(np.abs(X - X_prev))/np.max(np.abs(X))
+
+        X_prev = np.copy(X)
+
         i += 1
 
+
+    residuo = 0
+
+
     fim = time.perf_counter()
+
     tempo = fim - inicio
-    residuo = b - np.dot(A, X)
+    
+    residuo = b - A @ X
 
     return X, residuo, i, tempo
+
+
+    
+
+
