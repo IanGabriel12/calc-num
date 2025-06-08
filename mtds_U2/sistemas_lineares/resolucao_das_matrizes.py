@@ -11,9 +11,17 @@ matriz_um = mmread('mtds_U2/matrizes/bcsstk22.mtx').toarray()
 matriz_dois = mmread('mtds_U2/matrizes/bcsstk23.mtx').toarray()
 matriz_tres = mmread('mtds_U2/matrizes/bcsstk24.mtx').toarray()
 
-B1 = np.random.randint(1, 51, size=(138, 1))
-B2 = np.random.randint(1, 51, size=(3134, 1))
-B3 = np.random.randint(1, 51, size=(3562, 1))
+B1 = np.array(
+    list(map(lambda x: [int(x)], open('mtds_U2/matrizes/B1.txt').readline().split()))
+)
+
+B2 = np.array(
+    list(map(lambda x: [int(x)], open('mtds_U2/matrizes/B2.txt').readline().split()))
+)
+
+B3 = np.array(
+    list(map(lambda x: [int(x)], open('mtds_U2/matrizes/B3.txt').readline().split()))
+)
 
 testes = [(matriz_um, B1), (matriz_dois, B2), (matriz_tres, B3)]
 
