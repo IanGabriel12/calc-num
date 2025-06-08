@@ -22,7 +22,7 @@ def criterio_lc(A):
     else:
         return 1
 
-def metodo_gaussjacobi(A, B, eps=1e-6, MAX_ITERACOES=10000):
+def metodo_gaussjacobi(A, B, eps=1e-6, MAX_ITERACOES=1000):
     inicio = time.perf_counter()
     n = len(A)
     criterio = criterio_lc(A)

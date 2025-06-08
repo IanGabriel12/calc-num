@@ -54,7 +54,7 @@ Returns:
     str: Mensagem indicando que o método não converge.
     None: Se o número máximo de iterações for atingido.
 """
-def metodo_gauss_seidel(A, B, eps=1e-6, MAX_ITERACOES=10000):
+def metodo_gauss_seidel(A, B, eps=1e-6, MAX_ITERACOES=1000):
     inicio = time.perf_counter()
     n = len(A)
 
