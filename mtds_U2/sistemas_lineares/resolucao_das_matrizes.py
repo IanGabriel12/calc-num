@@ -1,10 +1,12 @@
-from scipy.io import mmread 
+# from scipy.io import mmread 
+from fast_matrix_market import mmread
 import numpy as np
 import utils
 from mtd_fatoracao_lu import fatoracao_lu
 from mtd_gauss import elim_gauss
-from mtd_gauss_jacobi import metodo_gaussjacobi
-from mtd_gauss_seidel import metodo_gauss_seidel
+from mtd_gauss_jacobi import metodo_gaussjacobi, metodo_gaussjacobi2
+from mtd_gauss_seidel import metodo_gauss_seidel, metodo_gauss_seidel2
+
 import sys
 
 matriz_um = mmread('mtds_U2/matrizes/bcsstk22.mtx').toarray()
@@ -58,8 +60,12 @@ if __name__ == "__main__":
         metodo_func = fatoracao_lu
     elif nome_metodo == "gauss_jacobi":
         metodo_func = metodo_gaussjacobi
+    elif nome_metodo == "gauss_jacobi2":
+        metodo_func = metodo_gaussjacobi2
     elif nome_metodo == "gauss_seidel":
         metodo_func = metodo_gauss_seidel
+    elif nome_metodo == "gauss_seidel2":
+        metodo_func = metodo_gauss_seidel2
     else:
         raise NameError("Não existe método com esse nome")
 

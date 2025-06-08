@@ -75,3 +75,41 @@ def metodo_gaussjacobi(A, B, eps=1e-6, MAX_ITERACOES=1000):
     return X, residuo, x, tempo
 
         
+
+def metodo_gaussjacobi2(A, b, eps=1e-6, MAX_ITERACOES=1000):
+    inicio = time.perf_counter()
+    n, _ = np.shape(A)
+
+    D = np.diag(np.diag(A))
+    if np.any(np.diag(D) == 0):
+        raise Exception("Erro: Diagonal com valor 0")
+
+    D_inv = np.linalg.inv(D)
+
+    T = np.eye(n) - D_inv @ A
+    C = D_inv @ b
+    X0 = np.zeros((n,1))
+    X = np.copy(X0)
+    i = 0
+    erro = 1
+    while i <= MAX_ITERACOES:
+        X = T @ X0 + C
+        if np.max(np.abs(X)) == 0:
+             erro = np.max(np.abs(X - X0))
+        else:
+             erro = np.max(np.abs(X - X0)) / np.max(np.abs(X))
+
+        if erro < eps:
+            fim = time.perf_counter()
+            tempo = fim - inicio
+            residuo = b - np.dot(A, X)
+            return X, residuo, i + 1, tempo
+        
+        X0 = np.copy(X)
+        i += 1
+
+    fim = time.perf_counter()
+    tempo = fim - inicio
+    residuo = b - np.dot(A, X)
+
+    return X, residuo, i, tempo

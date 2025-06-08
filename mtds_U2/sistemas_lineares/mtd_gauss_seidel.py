@@ -112,3 +112,33 @@ def metodo_gauss_seidel(A, B, eps=1e-6, MAX_ITERACOES=1000):
     fim = time.perf_counter()
     tempo = fim - inicio
     return X, residuo, x, tempo  
+
+
+def metodo_gauss_seidel2(A, b, eps=1e-6, MAX_ITERACOES=1000):
+    inicio = time.perf_counter()
+    if not (criterio_lc(A)):
+        print("Aviso: O método não garante a convergencia para esta matriz")
+    n = len(b)
+    X = np.zeros_like(b, dtype=np.double)
+    X_anterior = np.zeros_like(X)
+    
+    i = 0
+    while i < MAX_ITERACOES:
+        X_anterior[:] = X
+        
+        for j in range(n):
+            soma = np.dot(A[j, :j], X[:j]) + np.dot(A[j, j+1:], X_anterior[j+1:])
+            
+            X[j] = (b[j] - soma) / A[j, j]
+            
+        er = np.linalg.norm(X - X_anterior, np.inf) / np.linalg.norm(X, np.inf)
+        
+        if er < eps:
+            break
+        i += 1
+            
+    fim = time.perf_counter()
+    tempo = fim - inicio
+    residuo = b - np.dot(A, X)
+    
+    return X, residuo, i + 1, tempo
