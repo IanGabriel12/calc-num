@@ -38,7 +38,7 @@ def metodo_gaussjacobi(A, B, eps=1e-6, MAX_ITERACOES=1000):
                     B[[i, k]] = B[[k, i]]
                     break
             if A[i][i] == 0:
-                raise "Erro: Não foi possível evitar divisão por zero mesmo após troca de linhas."
+                raise ValueError("Erro: Não foi possível evitar divisão por zero mesmo após troca de linhas.")
     
     X = np.array([B[i] / A[i][i] for i in range(n)])
     v_aux = np.zeros(n)

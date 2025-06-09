@@ -7,7 +7,6 @@ from mtds_U2.sistemas_lineares.mtd_gauss_seidel import metodo_gauss_seidel
 from mtds_U2.interpolacao.mtd_lagrange import mtd_interp_lagrange
 from mtds_U2.interpolacao.mtd_newton import interpolacao_newton_completa
 
-
 print("Sistemas Lineares")
 print("Questões da lista: ")
 
@@ -17,18 +16,16 @@ def print_questao_15(A, b):
         print(resposta.flatten(), residuo.flatten())
         resposta, residuo, iteracoes, tempo = fatoracao_lu(A.copy(), b.copy())
         print(resposta.flatten(), residuo.flatten())
-    except Exception:
+    except ValueError as ex:
         print("Sistema não tem solução única")
     
-    
-
 def print_questao_16(A, b):
     try:
         resposta, residuo, iteracoes, tempo = metodo_gaussjacobi(A.copy(), b.copy(), 1e-3, 5)
         print(resposta.flatten(), residuo.flatten(), iteracoes)
         resposta, residuo, iteracoes, tempo = metodo_gauss_seidel(A.copy(), b.copy(), 1e-3, 5)
         print(resposta.flatten(), residuo.flatten(), iteracoes)
-    except:
+    except ValueError as ex:
         print("Sistema não tem solução única")
 
 def print_questao_17(A, b):
@@ -37,7 +34,7 @@ def print_questao_17(A, b):
         print(resposta.flatten(), residuo.flatten())
         resposta, residuo, iteracoes, tempo = metodo_gauss_seidel(A.copy(), b.copy(), 1e-3, 10)
         print(resposta.flatten(), residuo.flatten(), iteracoes)
-    except:
+    except ValueError as ex:
         print("Sistema não possui solução única")
 
 def print_questao_19(A, b):
@@ -48,9 +45,9 @@ def print_questao_19(A, b):
         print(resposta.flatten(), residuo.flatten())
         resposta, residuo, iteracoes, tempo = metodo_gaussjacobi(A.copy(), b.copy(), 5e-2, 5)
         print(resposta.flatten(), residuo.flatten(), iteracoes)
-        resposta, residuo, iteracoes = metodo_gauss_seidel(A.copy(), b.copy(), 5e-2, 5)
+        resposta, residuo, iteracoes, tempo = metodo_gauss_seidel(A.copy(), b.copy(), 5e-2, 5)
         print(resposta.flatten(), residuo.flatten(), iteracoes)
-    except:
+    except ValueError as ex:
         print("Sistema não tem solução única")
 
 def print_questao_21(P, x):
@@ -85,8 +82,6 @@ A = np.array(
 b = np.array([[11], [4], [-2]], dtype=float)
 
 print_questao_15(A, b);
-
-
 
 # Questão 15 b)
 A = np.array(

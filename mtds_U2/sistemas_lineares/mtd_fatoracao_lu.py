@@ -1,4 +1,4 @@
-from utils import resolve_inferior, resolve_superior
+from .utils import resolve_inferior, resolve_superior
 import numpy as np
 import time
 def fatoracao_lu(A, b):
