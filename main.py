@@ -11,6 +11,7 @@ print("Sistemas Lineares")
 print("Questões da lista: ")
 
 def print_questao_15(A, b):
+    print("Questão 15")
     try:
         resposta, residuo, iteracoes, tempo = elim_gauss(A.copy(), b.copy())
         print(resposta.flatten(), residuo.flatten())
@@ -20,6 +21,7 @@ def print_questao_15(A, b):
         print("Sistema não tem solução única")
     
 def print_questao_16(A, b):
+    print("Questão 16")
     try:
         resposta, residuo, iteracoes, tempo = metodo_gaussjacobi(A.copy(), b.copy(), 1e-3, 5)
         print(resposta.flatten(), residuo.flatten(), iteracoes)
@@ -29,6 +31,7 @@ def print_questao_16(A, b):
         print("Sistema não tem solução única")
 
 def print_questao_17(A, b):
+    print("Questão 17")
     try:
         resposta, residuo, iteracoes, tempo = elim_gauss(A.copy(), b.copy())
         print(resposta.flatten(), residuo.flatten())
@@ -38,6 +41,7 @@ def print_questao_17(A, b):
         print("Sistema não possui solução única")
 
 def print_questao_19(A, b):
+
     try:
         resposta, residuo, iteracoes, tempo = elim_gauss(A.copy(), b.copy())
         print(resposta.flatten(), residuo.flatten())
@@ -81,6 +85,7 @@ A = np.array(
 
 b = np.array([[11], [4], [-2]], dtype=float)
 
+print("Questão 15 a)")
 print_questao_15(A, b);
 
 # Questão 15 b)
@@ -92,6 +97,7 @@ A = np.array(
 
 b = np.array([[-1], [0], [4]], dtype=float)
 
+print("Questão 15 b)")
 print_questao_15(A, b)
 
 
@@ -104,6 +110,7 @@ A = np.array(
 
 b = np.array([[7], [8], [9]], dtype=float)
 
+print("Questão 15 c)")
 print_questao_15(A, b)
 
 # Questão 15 d)
@@ -116,6 +123,7 @@ A = np.array(
 
 b = np.array([[7], [-9], [23], [11]], dtype=float)
 
+print("Questão 15 d)")
 print_questao_15(A, b)
 
 
@@ -129,6 +137,8 @@ A = np.array(
 
 b = np.array([[0], [25], [-11], [15]], dtype=float)
 
+print("Questão 16 a)")
+
 print_questao_16(A, b)
 
 # Questão 16 b)
@@ -140,6 +150,8 @@ A = np.array(
 )
 
 b = np.array([[10], [16], [2], [-2]], dtype=float)
+
+print("Questão 16 b)")
 print_questao_16(A, b)
 
 
@@ -152,6 +164,9 @@ A = np.array(
 )
 
 b = np.array([[0.2], [-2.6], [1.0], [-2.5]], dtype=float)
+
+print("Questão 16 c)")
+
 print_questao_16(A, b)
 
 # Questão 17
@@ -168,6 +183,8 @@ b = np.array([
     [2], [2], [2], [20], [4]
 ])
 
+print("Questão 17")
+
 print_questao_17(A, b)
 
 # Questão 19
@@ -179,6 +196,8 @@ A = np.array(
 )
 
 b = np.array([[-3], [4], [7], [5]], dtype=float)
+
+print("Questão 19")
 
 print_questao_19(A, b)
 
