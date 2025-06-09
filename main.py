@@ -11,7 +11,6 @@ print("Sistemas Lineares")
 print("Questões da lista: ")
 
 def print_questao_15(A, b):
-    print("Questão 15")
     try:
         resposta, residuo, iteracoes, tempo = elim_gauss(A.copy(), b.copy())
         print(resposta.flatten(), residuo.flatten())
@@ -21,7 +20,6 @@ def print_questao_15(A, b):
         print("Sistema não tem solução única")
     
 def print_questao_16(A, b):
-    print("Questão 16")
     try:
         resposta, residuo, iteracoes, tempo = metodo_gaussjacobi(A.copy(), b.copy(), 1e-3, 5)
         print(resposta.flatten(), residuo.flatten(), iteracoes)
@@ -31,7 +29,6 @@ def print_questao_16(A, b):
         print("Sistema não tem solução única")
 
 def print_questao_17(A, b):
-    print("Questão 17")
     try:
         resposta, residuo, iteracoes, tempo = elim_gauss(A.copy(), b.copy())
         print(resposta.flatten(), residuo.flatten())
@@ -40,8 +37,14 @@ def print_questao_17(A, b):
     except ValueError as ex:
         print("Sistema não possui solução única")
 
-def print_questao_19(A, b):
+def print_questao_18(A, b):
+    try:
+        resposta, residuo, iteracoes, tempo = elim_gauss(A.copy(), b.copy())
+        print(resposta.flatten(), residuo.flatten())
+    except ValueError as ex:
+        print("Sistema não possui solução única")
 
+def print_questao_19(A, b):
     try:
         resposta, residuo, iteracoes, tempo = elim_gauss(A.copy(), b.copy())
         print(resposta.flatten(), residuo.flatten())
@@ -101,7 +104,7 @@ print("Questão 15 b)")
 print_questao_15(A, b)
 
 
-# Questão 15 c) [não encontra solução]
+# Questão 15 c)
 A = np.array(
     [[0.252, 0.36, 0.12],
     [0.112, 0.16, 0.24],
@@ -113,7 +116,7 @@ b = np.array([[7], [8], [9]], dtype=float)
 print("Questão 15 c)")
 print_questao_15(A, b)
 
-# Questão 15 d)
+# Questão 15 d)  [não encontra solução]
 A = np.array(
     [[3, -2, 5, 1],
     [-6, 4, -8, 1],
@@ -181,11 +184,21 @@ A = np.array([
 
 b = np.array([
     [2], [2], [2], [20], [4]
-])
-
-print("Questão 17")
+], dtype=float)
 
 print_questao_17(A, b)
+
+# Questão 18
+A = np.array([
+    [1, 2, 1],
+    [2, -1, 2],
+    [3, 1, 3]
+], dtype=float)
+
+b = np.array([[1], [2], [4]], dtype=float)
+
+print("Questão 18")
+print(print_questao_18(A, b))
 
 # Questão 19
 A = np.array(
