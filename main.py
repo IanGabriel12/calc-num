@@ -13,40 +13,40 @@ print("Questões da lista: ")
 
 def print_questao_15(A, b):
     try:
-        resposta, residuo, iteracoes = elim_gauss(A.copy(), b.copy())
+        resposta, residuo, iteracoes, tempo = elim_gauss(A.copy(), b.copy())
         print(resposta.flatten(), residuo.flatten())
-        resposta, residuo, iteracoes = fatoracao_lu(A.copy(), b.copy())
+        resposta, residuo, iteracoes, tempo = fatoracao_lu(A.copy(), b.copy())
         print(resposta.flatten(), residuo.flatten())
-    except:
+    except Exception:
         print("Sistema não tem solução única")
     
     
 
 def print_questao_16(A, b):
     try:
-        resposta, residuo, iteracoes = metodo_gaussjacobi(A.copy(), b.copy(), 1e-3, 5)
+        resposta, residuo, iteracoes, tempo = metodo_gaussjacobi(A.copy(), b.copy(), 1e-3, 5)
         print(resposta.flatten(), residuo.flatten(), iteracoes)
-        resposta, residuo, iteracoes = metodo_gauss_seidel(A.copy(), b.copy(), 1e-3, 5)
+        resposta, residuo, iteracoes, tempo = metodo_gauss_seidel(A.copy(), b.copy(), 1e-3, 5)
         print(resposta.flatten(), residuo.flatten(), iteracoes)
     except:
         print("Sistema não tem solução única")
 
 def print_questao_17(A, b):
     try:
-        resposta, residuo, iteracoes = elim_gauss(A.copy(), b.copy())
+        resposta, residuo, iteracoes, tempo = elim_gauss(A.copy(), b.copy())
         print(resposta.flatten(), residuo.flatten())
-        resposta, residuo, iteracoes = metodo_gauss_seidel(A.copy(), b.copy(), 1e-3, 10)
+        resposta, residuo, iteracoes, tempo = metodo_gauss_seidel(A.copy(), b.copy(), 1e-3, 10)
         print(resposta.flatten(), residuo.flatten(), iteracoes)
     except:
         print("Sistema não possui solução única")
 
 def print_questao_19(A, b):
     try:
-        resposta, residuo, iteracoes = elim_gauss(A.copy(), b.copy())
+        resposta, residuo, iteracoes, tempo = elim_gauss(A.copy(), b.copy())
         print(resposta.flatten(), residuo.flatten())
-        resposta, residuo, iteracoes = fatoracao_lu(A.copy(), b.copy())
+        resposta, residuo, iteracoes, tempo = fatoracao_lu(A.copy(), b.copy())
         print(resposta.flatten(), residuo.flatten())
-        resposta, residuo, iteracoes = metodo_gaussjacobi(A.copy(), b.copy(), 5e-2, 5)
+        resposta, residuo, iteracoes, tempo = metodo_gaussjacobi(A.copy(), b.copy(), 5e-2, 5)
         print(resposta.flatten(), residuo.flatten(), iteracoes)
         resposta, residuo, iteracoes = metodo_gauss_seidel(A.copy(), b.copy(), 5e-2, 5)
         print(resposta.flatten(), residuo.flatten(), iteracoes)
